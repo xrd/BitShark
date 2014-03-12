@@ -1,0 +1,5 @@
+.invitees{ 'ng-show' => 'selectedFriends' }
+  {{ selectedFriends.length }} friends to be invited
+
+%span.friend{ 'ng-repeat' => 'friend in friends' } 
+  %img.profile_picture{ "ng:src" => 'https://graph.facebook.com/{{friend.id}}/picture', 'ng-click' => 'toggle(friend)', 'ng-class' => '{ "selected" : friend.selected }' }

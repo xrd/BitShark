@@ -1,0 +1,6 @@
+<div class='invitees' ng-show='selectedFriends'>
+  {{ selectedFriends.length }} friends to be invited
+</div>
+<span class='friend' ng-repeat='friend in friends'>
+  <img class='profile_picture' ng-class='{ "selected" : friend.selected }' ng-click='toggle(friend)' ng:src='https://graph.facebook.com/{{friend.id}}/picture'>
+</span>

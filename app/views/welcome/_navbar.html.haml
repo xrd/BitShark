@@ -1,0 +1,15 @@
+%nav.navbar.navbar-default{ role: 'navigation' }
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand Payday Loans
+    .navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          - unless @current_user
+            %a{ href: '/auth/facebook' } Login
+          - else
+            %a= @current_user.name
+          
+        
+      
+    

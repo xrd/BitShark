@@ -50,4 +50,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem "haml-rails"
 
 gem 'omniauth-facebook'
+gem 'angularjs-rails'
+gem "koala", "~> 1.8.0rc1"
+gem "coinbase"
 
