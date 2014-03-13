@@ -17,9 +17,11 @@
 
 @app.controller 'HomeCtrl', [ '$scope', 'Needed', 'Loans', ( $scope, Needed, Loans ) ->
         $scope.needed = Needed
+        ]
 
-
-        $scope.needed
+@app.controller 'DonateCtrl', [ '$scope', 'Loans', ($scope, Loans) ->
+        Loans.index {}, (response) ->
+                $scope.loans = response
         ]
 
 @app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ($scope, Loans, $location, $timeout) ->
@@ -31,7 +33,7 @@
                 $scope.isPreview = onOff
                 $scope.rendered = markdown.toHTML $scope.loan.description
 
-        $scope.loan = () ->
+        $scope.sponsor = () ->
                 Loans.create( {}, { loan: $scope.loan }, ( (response) ->
                         $scope.message = "Successfully added loan"
                         $timeout ( () -> $location.path '/' ), 2000

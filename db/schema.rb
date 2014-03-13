@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20140313034541) do
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "loanee"
     t.string   "description"
     t.string   "familiarity"
     t.float    "amount"
