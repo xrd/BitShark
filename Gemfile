@@ -53,4 +53,8 @@ gem 'omniauth-facebook'
 gem 'angularjs-rails'
 gem "koala", "~> 1.8.0rc1"
 gem "coinbase"
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem "faker"
+end
 

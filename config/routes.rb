@@ -3,10 +3,13 @@ Plbh::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/signout', to: 'sessions#destroy'
   get '/facebook/friends', to: "facebook#friends"
   
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  resources :sponsors
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

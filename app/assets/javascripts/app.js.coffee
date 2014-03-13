@@ -1,17 +1,25 @@
 @app = angular.module( 'plbh', [ 'ngRoute', 'ngResource' ] )
 
 @app.factory( 'Needed', () ->
-        { sponsors: 45, cashiers: 12, checkers: 5 }
+        { donations: 23 }
         )
 
+@app.factory 'Sponsors', [ '$resource', ($resource) ->
+        $resource '/sponsors/:action', {},
+                index: { isArray: true, method: 'GET' }
+        ]
 @app.factory 'Facebook', [ '$resource', ( $resource ) ->
         $resource '/facebook/:action', {},
                 friends: { params: { action: 'friends' }, isArray: true, method: 'GET' }
                 invite: { params: { action: 'invite' }, method: 'POST' }
         ]
 
-@app.controller 'TopCtrl', [ '$scope', 'Needed', ( $scope, Needed ) ->
+@app.controller 'HomeCtrl', [ '$scope', 'Needed', ( $scope, Needed ) ->
         $scope.needed = Needed
+        ]
+
+@app.controller 'SponsorCtrl', [ '$scope', 'Sponsors', ($scope, Sponsors) ->
+        $scope.sponsors = Sponsors.index()
         ]
 
 @app.controller 'FacebookCtrl', [ '$scope', 'Facebook', ( $scope, fb ) ->
@@ -32,7 +40,7 @@
                 $scope.addToSelected( friend, friend.selected )
         ]
 
-@app.controller 'LoginCtrl', [ '$scope', ($scope) ->
+@app.controller 'LoginCtrl', [ '$scope', '$window', ($scope, $window) ->
         $window.location.href = "/auth/facebook"
         ]
 
@@ -40,17 +48,18 @@
         $routeProvider.when('/invite',
                 templateUrl: '/t/invite',
                 controller: 'FacebookCtrl' )
-        $routeProvider.when('/checker',
-                templateUrl: '/t/checker',
-                controller: 'CheckerCtrl' )
-        $routeProvider.when('/cashier',
-                templateUrl: '/t/cashier',
-                controller: 'CashierCtrl' )
+        $routeProvider.when('/sponsor',
+                templateUrl: '/t/sponsor',
+                controller: 'SponsorCtrl' )
+        $routeProvider.when('/donate',
+                templateUrl: '/t/donate',
+                controller: 'DonateCtrl' )
+        $routeProvider.when('/auth/facebook',
+                templateUrl: '/t/login'
+                controller: 'LoginCtrl' )
         $routeProvider.when('/',
                 templateUrl: '/t/home',
-                controller: 'TopCtrl' )
-        $routeProvider.when('/auth/facebook',
-                controller: 'LoginCtrl' )
+                controller: 'HomeCtrl' )
         $routeProvider.otherwise( redirectTo: '/' )
         $locationProvider.html5Mode(true)
         ]
