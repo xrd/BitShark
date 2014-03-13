@@ -1,12 +1,29 @@
 <div class='label' ng-show='message'>{{ message }}</div>
 <div class='form' role='form'>
-  <h3>Thanks for helping someone today!</h3>
+  <h3 ng-show='type == "inneed"'>Need a PayDay Loan?</h3>
+  <div class='form-group' ng-show='type == "inneed"'>
+    <label for='loaneeName'>Your first name</label>
+    <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Your first name' type='text'>
+  </div>
+  <h3>Identity</h3>
+  <div class='form-group'>
+    <label for='identity'>Cell phone or email of loan recipient</label>
+    <input class='form-control' id='identity' ng-model='loan.identity' placeholder='Cell phone or email' type='text'>
+    <p class='help-block'>
+      How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made.
+    </p>
+  </div>
+  <h3 ng-show='type == "sponsor"'>Thanks for helping someone today!</h3>
   <div class='form-group'>
     <label for='loaneeName'>Loan Recipient Name (first name only is fine)</label>
     <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Enter the first name of the person' type='text'>
   </div>
+  <div class='form-group' ng-show='type == "inneed"'>
+    <label for='loaneeName'>Your first name</label>
+    <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Your first name' type='text'>
+  </div>
   <div class='form-group'>
-    <label for='loanDescription'>Tell a little of the loan recipient's story</label>
+    <label for='loanDescription'>For purpose what will this loan be used?</label>
     <p class='help-block'>
       Markdown enabled.
       <span class='glyphicon glyphicon-eye-open' ng-click='preview(true)' ng-hide='isPreview'></span>
@@ -21,7 +38,7 @@
     <label for='loanAmount'>What amount is needed?</label>
     <input class='form-control' id='loanAmount' ng-model='loan.amount' placeholder='Loan amount' type='text'>
   </div>
-  <div class='form-group'>
+  <div class='form-group' ng-show='type == "sponsor"'>
     <label for='loaneeFamiliarity'>How well do you know this person?</label>
     <select class='form-control' id='loanFamiliarity' ng-model='loan.familiarity'>
       <option val='well'>Very well</option>

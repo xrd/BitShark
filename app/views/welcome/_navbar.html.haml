@@ -1,9 +1,21 @@
 %nav.navbar.navbar-default{ role: 'navigation' }
   .container-fluid
     .navbar-header
-      %a.navbar-brand Payday Loans
-    .navbar-collapse
+      %a.navbar-brand SharkBit
+    .navbar
+      
       %ul.nav.navbar-nav
+        %li
+          %a{ href: '/help' } Help
+        %li 
+          %a{ href: '/loans' } Loans
+        %li 
+          %a{ href: '/donate' } Donate
+        %li 
+          %a{ href: '/invite' } Invite
+        %li 
+          %a{ href: '/' } Home
+
         %li
           - unless @current_user
             %a{ href: '/auth/facebook' } Login

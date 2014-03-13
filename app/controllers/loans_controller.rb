@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  def index
+  def all
     render json: Loan.all
   end
 

@@ -5,11 +5,21 @@ Plbh::Application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/signout', to: 'sessions#destroy'
   get '/facebook/friends', to: "facebook#friends"
+
+  get '/invite', to: 'welcome#index'
+  get '/loans', to: 'welcome#index'
+  get '/home', to: 'welcome#index'
+  get '/donate', to: 'welcome#index'
+  get '/help', to: 'welcome#index'
   
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :loans
+  resources :loans do
+    collection do
+      get :all
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

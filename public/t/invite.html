@@ -1,6 +1,16 @@
+<input ng-change='searchByName()' ng-model='search' placeholder='Search by name...'>
+<span class='alphabet_pager'>
+  <span ng-repeat='item in alphabetPagerChunks'>
+    <span ng-hide='0 == $index'></span>
+    <dd>
+      <a ng-click='jump(item.offset)'>{{item.link}}</a>
+    </dd>
+  </span>
+</span>
+<br>
 <div class='invitees' ng-show='selectedFriends'>
   {{ selectedFriends.length }} friends to be invited
 </div>
-<span class='friend' ng-repeat='friend in friends'>
+<span class='friend' ng-repeat='friend in page'>
   <img class='profile_picture' ng-class='{ "selected" : friend.selected }' ng-click='toggle(friend)' ng:src='https://graph.facebook.com/{{friend.id}}/picture'>
 </span>

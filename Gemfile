@@ -60,3 +60,6 @@ end
 
 gem 'ng-rails-csrf'
 
+group :development do
+  gem 'guard-haml'
+end

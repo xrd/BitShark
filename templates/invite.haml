@@ -1,5 +1,12 @@
+%input{ 'ng-model' => 'search', placeholder: 'Search by name...', 'ng-change' => 'searchByName()' }
+%span.alphabet_pager                                                                                                
+  %span{ 'ng-repeat' => 'item in alphabetPagerChunks' }                                                        
+    %span{ 'ng-hide' => '0 == $index' } |
+    %dd
+      %a{ "ng-click" => 'jump(item.offset)' } {{item.link}}    
+%br
 .invitees{ 'ng-show' => 'selectedFriends' }
   {{ selectedFriends.length }} friends to be invited
 
-%span.friend{ 'ng-repeat' => 'friend in friends' } 
+%span.friend{ 'ng-repeat' => 'friend in page' } 
   %img.profile_picture{ "ng:src" => 'https://graph.facebook.com/{{friend.id}}/picture', 'ng-click' => 'toggle(friend)', 'ng-class' => '{ "selected" : friend.selected }' }
