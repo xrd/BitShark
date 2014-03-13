@@ -1,0 +1,31 @@
+.label{ 'ng-show' => 'message' } {{ message }}
+
+.form{ role: 'form' }
+  %h3 Thanks for helping someone today!
+  .form-group
+    %label{ for: 'loaneeName' } Loan Recipient Name (first name only is fine)
+    %input.form-control{ type: 'text', placeholder: 'Enter the first name of the person', id: 'loaneeName', 'ng-model' => 'loan.name' }    
+  .form-group
+    %label{ for: 'loanDescription' } Tell a little of the loan recipient's story
+    %p.help-block 
+      Markdown enabled.
+      %span.glyphicon.glyphicon-eye-open{ 'ng-hide' => 'isPreview', 'ng-click' => 'preview(true)' }
+      %span.glyphicon.glyphicon-list-alt{ 'ng-show' => 'isPreview', 'ng-click' => 'preview(false)' }
+    %textarea.form-control{ id: 'loanDescription', cols: 30, rows: 5, 'ng-hide' => 'isPreview', 'ng-model' => 'loan.description' }    
+    .preview{ 'ng-show' => 'isPreview' } 
+      %span{ 'ng-bind-html' => 'rendered' }
+    
+  .form-group
+    %label{ for: 'loanAmount' } What amount is needed?
+    %input.form-control{ type: 'text', placeholder: 'Loan amount', id: 'loanAmount', 'ng-model' => 'loan.amount' }
+  .form-group
+    %label{ for: 'loaneeFamiliarity' } How well do you know this person?
+    %select.form-control{ id: 'loanFamiliarity', 'ng-model' => 'loan.familiarity' }
+      %option{ val: 'well' } Very well
+      %option{ val: 'some' } Some familiarity
+      %option{ val: 'limited' } I know very little about them
+
+  Once you submit your sponsorship request, others inside your social circles (and those outside) will
+  have an opportunity to help sponsor the loan.
+
+  %button.btn.btn-large{ 'ng-click' => 'sponsor()' } Sponsor them (and get help)

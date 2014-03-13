@@ -4,6 +4,7 @@ class AddLoan < ActiveRecord::Migration
       t.integer :user_id
       t.string :name
       t.string :description
+      t.string :familiarity
       t.float :amount
       t.timestamps
     end

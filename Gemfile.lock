@@ -87,6 +87,7 @@ GEM
     multi_json (1.9.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    ng-rails-csrf (0.1.0)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
       jwt (~> 0.1.8)
@@ -188,6 +189,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   koala (~> 1.8.0rc1)
+  ng-rails-csrf
   omniauth-facebook
   rails (= 4.0.2)
   rspec-rails (~> 3.0.0.beta)

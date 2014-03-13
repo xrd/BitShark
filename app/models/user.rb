@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_many :loans
   validates_presence_of :email, :nickname, :provider, :uid
   validates_uniqueness_of :email
 

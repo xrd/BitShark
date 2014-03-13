@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20140313034541) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "description"
+    t.string   "familiarity"
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -16,4 +16,6 @@
 //= require angular
 //= require angular-resource
 //= require angular-route
+//= require angular-sanitize
+//= require ng-rails-csrf
 //= require_tree .

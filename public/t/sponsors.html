@@ -1,0 +1,35 @@
+<div class='label' ng-show='message'>{{ message }}</div>
+<div class='form' role='form'>
+  <h3>Thanks for helping someone today!</h3>
+  <div class='form-group'>
+    <label for='loaneeName'>Loan Recipient Name (first name only is fine)</label>
+    <input class='form-control' id='loaneeName' ng-model='loan.name' placeholder='Enter the first name of the person' type='text'>
+  </div>
+  <div class='form-group'>
+    <label for='loanDescription'>Tell a little of the loan recipient's story</label>
+    <p class='help-block'>
+      Markdown enabled.
+      <span class='glyphicon glyphicon-eye-open' ng-click='preview(true)' ng-hide='isPreview'></span>
+      <span class='glyphicon glyphicon-list-alt' ng-click='preview(false)' ng-show='isPreview'></span>
+    </p>
+    <textarea class='form-control' cols='30' id='loanDescription' ng-hide='isPreview' ng-model='loan.description' rows='5'></textarea>
+    <div class='preview' ng-show='isPreview'>
+      <span ng-bind-html='rendered'></span>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label for='loanAmount'>What amount is needed?</label>
+    <input class='form-control' id='loanAmount' ng-model='loan.amount' placeholder='Loan amount' type='text'>
+  </div>
+  <div class='form-group'>
+    <label for='loaneeFamiliarity'>How well do you know this person?</label>
+    <select class='form-control' id='loanFamiliarity' ng-model='loan.familiarity'>
+      <option val='well'>Very well</option>
+      <option val='some'>Some familiarity</option>
+      <option val='limited'>I know very little about them</option>
+    </select>
+  </div>
+  Once you submit your sponsorship request, others inside your social circles (and those outside) will
+  have an opportunity to help sponsor the loan.
+  <button class='btn btn-large' ng-click='sponsor()'>Sponsor them (and get help)</button>
+</div>

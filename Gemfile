@@ -58,3 +58,5 @@ group :development, :test do
   gem "faker"
 end
 
+gem 'ng-rails-csrf'
+
