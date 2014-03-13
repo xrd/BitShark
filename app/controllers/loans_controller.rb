@@ -1,4 +1,4 @@
-class SponsorsController < ApplicationController
+class LoansController < ApplicationController
   def index
     render json: Loan.all
   end

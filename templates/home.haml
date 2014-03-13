@@ -27,7 +27,7 @@
     %a.active.btn-primary.btn.btn-large{ href: "/donate", role: "button" } Donate coverage to a loan
     %small.muted
       Offer a small amount of money to people in need.
-      %span.badge {{ needed.donations }} donation opportunities
+      %span.badge{ 'ng-show' => 'needed.donations' } {{ needed.donations }} donation opportunities
 
   .item
     %a.active.btn-primary.btn.btn-large{ href: "/invite", role: "button" } Invite friends

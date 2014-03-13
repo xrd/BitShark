@@ -1,13 +1,13 @@
 @app = angular.module( 'plbh', [ 'ngRoute', 'ngResource', 'ngSanitize', 'ng-rails-csrf' ] )
 
 @app.factory( 'Needed', () ->
-        { donations: 23 }
+        { donations: undefined }
         )
 
-@app.factory 'Sponsors', [ '$resource', ($resource) ->
-        $resource '/sponsors/:action', {},
+@app.factory 'Loans', [ '$resource', ($resource) ->
+        $resource '/loans/:action', {},
                 index: { isArray: true, method: 'GET' },
-                create: { isArray: false, method: "POST" }
+                create: { isArray: false, method: 'POST' }
         ]
 @app.factory 'Facebook', [ '$resource', ( $resource ) ->
         $resource '/facebook/:action', {},
@@ -15,21 +15,24 @@
                 invite: { params: { action: 'invite' }, method: 'POST' }
         ]
 
-@app.controller 'HomeCtrl', [ '$scope', 'Needed', ( $scope, Needed ) ->
+@app.controller 'HomeCtrl', [ '$scope', 'Needed', 'Loans', ( $scope, Needed, Loans ) ->
         $scope.needed = Needed
+
+
+        $scope.needed
         ]
 
-@app.controller 'SponsorsCtrl', [ '$scope', 'Sponsors', '$location', '$timeout', ($scope, Sponsors, $location, $timeout) ->
+@app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ($scope, Loans, $location, $timeout) ->
         $scope.loan = {}
-        $scope.sponsors = Sponsors.index()
+        $scope.loans = Loans.index()
         $scope.message = undefined
 
         $scope.preview = (onOff) ->
                 $scope.isPreview = onOff
                 $scope.rendered = markdown.toHTML $scope.loan.description
 
-        $scope.sponsor = () ->
-                Sponsors.create( {}, { loan: $scope.loan }, ( (response) ->
+        $scope.loan = () ->
+                Loans.create( {}, { loan: $scope.loan }, ( (response) ->
                         $scope.message = "Successfully added loan"
                         $timeout ( () -> $location.path '/' ), 2000
                         ), ( (error) -> $scope.message = "Bad response" ) )
@@ -61,9 +64,9 @@
         $routeProvider.when('/invite',
                 templateUrl: '/t/invite',
                 controller: 'FacebookCtrl' )
-        $routeProvider.when('/sponsors',
-                templateUrl: '/t/sponsors',
-                controller: 'SponsorsCtrl' )
+        $routeProvider.when('/loans',
+                templateUrl: '/t/loans',
+                controller: 'LoansCtrl' )
         $routeProvider.when('/donate',
                 templateUrl: '/t/donate',
                 controller: 'DonateCtrl' )

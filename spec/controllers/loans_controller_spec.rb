@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SponsorsController do
+describe LoansController do
 
   before( :each ) do
     5.times do
@@ -12,9 +12,9 @@ describe SponsorsController do
   end
   
   describe "#index" do
-    it "should get a list of users who are sponsors" do
+    it "should get a list of users who are loaners" do
       get :index
-      JSON.parse( response.body ).length.should == 2
+      expect( JSON.parse( response.body ).length ).to eq( 2 )
     end
   end
   
