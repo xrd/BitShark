@@ -35,7 +35,7 @@ markified = (txt) ->
         Loans.all {}, (response) ->
                 $scope.loans = response
                 for loan in $scope.loans
-                        loan.progress = parseInt(Math.random()*100)
+                        loan.progress ||= 0
         ]
 
 @app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ( $scope, Loans, $location, $timeout ) ->

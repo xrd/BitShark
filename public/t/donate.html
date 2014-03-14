@@ -2,6 +2,8 @@
   <div class='loan' ng-class='{ "odd" : $index%2==0, "even" : $index%2!=0 }' ng-repeat='loan in loans'>
     <h2>{{ loan.loanee }}</h2>
     <div class='description' ng-bind-html='markified( loan.description )'></div>
+    {{ loan.progress }}% of loan pledged.
     <progressbar value='loan.progress'></progressbar>
+    {{ loan.donate_button }}
   </div>
 </div>

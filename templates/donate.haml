@@ -2,4 +2,6 @@
   .loan{ 'ng-repeat' => 'loan in loans', 'ng-class' => '{ "odd" : $index%2==0, "even" : $index%2!=0 }' } 
     %h2 {{ loan.loanee }}
     .description{ 'ng-bind-html' => 'markified( loan.description )' }
+    {{ loan.progress }}% of loan pledged.
     %progressbar{ value: 'loan.progress' }
+    {{ loan.donate_button }}
