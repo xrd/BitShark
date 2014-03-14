@@ -65,4 +65,3 @@ group :development do
 end
 
 gem "maruku"
-gem 'activeadmin', github: 'gregbell/active_admin'
