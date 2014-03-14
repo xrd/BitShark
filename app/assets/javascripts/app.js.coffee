@@ -246,6 +246,10 @@ markified = (txt) ->
         $scope.init()
         ]
 
+@app.controller 'LogoutCtrl', [ '$scope', '$window', ($scope, $window) ->
+        $window.location.href = "/auth/signout"
+        ]
+
 @app.config [ '$httpProvider', ($httpProvider) ->
         $httpProvider.defaults.headers.common = { "AngularRails" : "1" }
         ]
@@ -266,6 +270,9 @@ markified = (txt) ->
         $routeProvider.when('/auth/facebook',
                 templateUrl: '/t/login'
                 controller: 'LoginCtrl' )
+        $routeProvider.when('/auth/signout',
+                templateUrl: '/t/logout'
+                controller: 'LogoutCtrl' )
         $routeProvider.when('/',
                 templateUrl: '/t/home',
                 controller: 'HomeCtrl' )

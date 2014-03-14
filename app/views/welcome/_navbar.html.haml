@@ -3,9 +3,26 @@
     .navbar-header
       %a.navbar-brand SharkBit
     .navbar.sharkbitnav
-      .visible-xs
-        %a.dropdown-toggle Options
-        %ul.dropdown-menu
+      - if @current_user
+        .visible-xs
+          %a.dropdown-toggle Options
+          %ul.dropdown-menu
+            %li 
+              %a{ href: '/' } Home
+            %li
+              %a{ href: '/help' } Help
+            %li 
+              %a{ href: '/sponsor' } Sponsor
+            %li 
+              %a{ href: '/donate' } Donate
+            %li 
+              %a{ href: '/invite' } Invite
+            %li
+              %a{ href: '/auth/signout' }== Logout #{@current_user.name}
+            %li
+              %a== [ #{@current_user.name} ]
+  
+        %ul.nav.navbar-nav.hidden-xs
           %li 
             %a{ href: '/' } Home
           %li
@@ -16,25 +33,13 @@
             %a{ href: '/donate' } Donate
           %li 
             %a{ href: '/invite' } Invite
-
-      %ul.nav.navbar-nav.hidden-xs
-        %li 
-          %a{ href: '/' } Home
-        %li
-          %a{ href: '/help' } Help
-        %li 
-          %a{ href: '/sponsor' } Sponsor
-        %li 
-          %a{ href: '/donate' } Donate
-        %li 
-          %a{ href: '/invite' } Invite
-
-        %li
-          - unless @current_user
+          %li
+            %a{ href: '/auth/signout' }== Logout
+          %li
+            %a== [ #{@current_user.name} ]
+  
+      - else
+        %ul.nav.navbar-nav
+          %li 
             %a{ href: '/auth/facebook' } Login
-          - else
-            %a= @current_user.name
-          
-        
-      
-    
+
