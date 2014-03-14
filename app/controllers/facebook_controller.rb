@@ -11,17 +11,19 @@ class FacebookController < ApplicationController
     render json: friends
   end
 
+  def sponsor_params( f, loan_id )
+    f.merge( user_id: @current_user.id, loan_id: loan_id ).permit(:sponsor_social_id,:loan_id)
+  end
+  
   def invite
+    logger.info "Sponsors: #{params[:sponsors]}"
+    sponsors = params[:sponsors]
     loan = Loan.find( params[:loan] )
-    params[:friends].each do |f|
-      loan.sponsors.create( params.merge( user_id: @current_user.id ) )
+    sponsors.keys.each do |f|
+      # convert to the appropriate format
+      sp = sponsors[f]
+      loan.sponsors.create( sponsor_params( sp, loan.id ) )
     end
-    
-    if false
-      @graph.put_wall_post("!", {:name => "i love loving you",
-                             :link => "http://www.explodingdog.com/title/ilovelovingyou.html"},
-                           "tmiley")
-    end
-    render json: { hi: "there" }
+    render json: { status: 'ok' }
   end
 end

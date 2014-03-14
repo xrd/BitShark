@@ -1,6 +1,5 @@
 Plbh::Application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,6 +7,8 @@ Plbh::Application.routes.draw do
   get '/auth/signout', to: 'sessions#destroy'
   get '/facebook/friends', to: "facebook#friends"
   post '/facebook/invite', to: "facebook#invite"
+  get '/payment/:code', to: "payment#received"
+  get '/payment/button/:code', to: "payment#button"
   
   get '/invite', to: 'welcome#index'
   get '/loans', to: 'welcome#index'

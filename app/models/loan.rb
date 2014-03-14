@@ -1,6 +1,7 @@
 class Loan < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :user
+  has_many :sponsors
 
   LIMIT = 50
   

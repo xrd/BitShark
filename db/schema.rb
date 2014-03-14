@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 20140314050105) do
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "loanee"
     t.string   "description"
+    t.string   "familiarity"
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -24,9 +25,10 @@ ActiveRecord::Schema.define(version: 20140314050105) do
 
   create_table "sponsors", force: true do |t|
     t.string   "button_code"
-    t.string   "sponsor_id"
+    t.string   "sponsor_social_id"
     t.string   "code"
     t.integer  "user_id"
+    t.integer  "loan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

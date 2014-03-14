@@ -212,7 +212,7 @@ markified = (txt) ->
         $scope.inviteFriends = () ->
                 $scope.inviting = true
                 $scope.message = "Please wait, sending invites"
-                fb.invite {}, { friends: $scope.selected, loan: $scope.loan.id }, (response) ->
+                fb.invite {}, { sponsors: $scope.selected, loan: $scope.loan.id }, (response) ->
                         $scope.message = response.message
                         $scope.message = "Invited friends."
                         $timeout ( () -> $location.path "/" ), 2000 
