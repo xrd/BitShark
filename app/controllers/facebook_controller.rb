@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class FacebookController < ApplicationController
   before_filter :setup_koala
 
@@ -11,7 +12,11 @@ class FacebookController < ApplicationController
   end
 
   def invite
-    logger.info params.inspect
+    loan = Loan.find( params[:loan] )
+    params[:friends].each do |f|
+      loan.sponsors.create( params.merge( user_id: @current_user.id ) )
+    end
+    
     if false
       @graph.put_wall_post("!", {:name => "i love loving you",
                              :link => "http://www.explodingdog.com/title/ilovelovingyou.html"},

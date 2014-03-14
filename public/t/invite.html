@@ -1,9 +1,14 @@
 <div class='alert alert-info' ng-show='message'>{{ message }}</div>
 <div class='toinvite' ng-hide='inviting &amp;&amp; !loading'>
-  Choose a loan recipient:
-  <select ng-model='loan' ng-options='l.simple_description for l in loans'></select>
   <div class='causeChosen' ng-show='loan'>
-    <a class='btn btn-large btn-default active' ng-click='inviteFriends()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute to: {{ loan.simple_description }}</a>
+    <a class='btn btn-large btn-default active' ng-click='inviteFriends()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute</a>
+    <div class='description'>Loan description: {{ loan.simple_description }}</div>
+  </div>
+  <div class='recipient'>
+    Choose a loan recipient:
+    <select ng-model='loan' ng-options='l.simple_description for l in loans'></select>
+  </div>
+  <div class='friends' ng-show='loan'>
     <input clear-search ng-change='searchByName()' ng-model='search' placeholder='Search by name...'>
     <span class='alphabet_pager'>
       <span ng-repeat='item in alphabetPagerChunks'>
