@@ -1,3 +1,7 @@
 <div class='donate'>
-  <div class='loan' ng-repeat='loan in loans'>{{ loan | json }}</div>
+  <div class='loan' ng-class='{ "odd" : $index%2==0, "even" : $index%2!=0 }' ng-repeat='loan in loans'>
+    <h2>{{ loan.loanee }}</h2>
+    <div class='description' ng-bind-html='markified( loan.description )'></div>
+    <progressbar value='loan.progress'></progressbar>
+  </div>
 </div>

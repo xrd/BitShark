@@ -1,8 +1,18 @@
-@app = angular.module( 'plbh', [ 'ngRoute', 'ngResource', 'ngSanitize', 'ng-rails-csrf' ] )
+@app = angular.module( 'plbh', [ 'ngRoute', 'ngResource', 'ngSanitize', 'ng-rails-csrf', 'ui.bootstrap' ] )
+
+markified = (txt) ->
+        markdown.toHTML txt
 
 @app.factory( 'Needed', () ->
         { donations: undefined }
         )
+
+@app.directive 'clearSearch', () ->
+        link = (scope,element,attrs) ->
+                element.clearSearch()
+                
+        return { restrict: 'A',
+        link: link }
 
 @app.factory 'Loans', [ '$resource', ($resource) ->
         $resource '/loans/:action', {},
@@ -12,7 +22,7 @@
 @app.factory 'Facebook', [ '$resource', ( $resource ) ->
         $resource '/facebook/:action', {},
                 friends: { params: { action: 'friends' }, isArray: true, method: 'GET' }
-                invite: { params: { action: 'invite' }, method: 'POST' }
+                invite: { params: { action: 'invite' }, method: 'POST', isArray: false }
         ]
 
 @app.controller 'HomeCtrl', [ '$scope', 'Needed', 'Loans', ( $scope, Needed, Loans ) ->
@@ -20,8 +30,12 @@
         ]
 
 @app.controller 'DonateCtrl', [ '$scope', 'Loans', ($scope, Loans) ->
+        $scope.markified = markified
+
         Loans.all {}, (response) ->
                 $scope.loans = response
+                for loan in $scope.loans
+                        loan.progress = parseInt(Math.random()*100)
         ]
 
 @app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ( $scope, Loans, $location, $timeout ) ->
@@ -30,12 +44,14 @@
                 $scope.type = "sponsor"
                 $scope.loan = {}
 
-        $scope.loans = Loans.index()
+        $scope.loans = Loans.all()
         $scope.message = undefined
 
         $scope.preview = (onOff) ->
                 $scope.isPreview = onOff
-                $scope.rendered = markdown.toHTML $scope.loan.description
+                $scope.rendered = markified $scope.loan.description
+
+        $scope.markified = markified
 
         $scope.sponsor = () ->
                 Loans.create( {}, { loan: $scope.loan }, ( (response) ->
@@ -47,14 +63,24 @@
         
         ]
 
-@app.controller 'FacebookCtrl', [ '$scope', 'Facebook', '$filter', ( $scope, fb, $filter ) ->
+@app.controller 'FacebookCtrl', [ '$scope', 'Facebook', '$filter', '$timeout', '$location', 'Loans', ( $scope, fb, $filter, $timeout, $location, Loans ) ->
                 
         $scope.alphabetPagerSize = 6
         $scope.display = {}
+
+        $scope.loading = true
+        $scope.message = "Loading friends from Facebook"
+
+        $scope.loanName = (name, description) ->
+                name + description[0..10] + "..."
         
         fb.friends {}, (response) ->
                 $scope.display.items = $scope.items = response
                 $scope.buildPagers()
+                Loans.all {}, (response) ->
+                        $scope.loans = response
+                        $scope.loading = false
+                        $scope.message = undefined
 
         $scope.getNameFromFullName = (text) ->
                 rv = undefined
@@ -176,17 +202,24 @@
         $scope.selected = {}
 
         $scope.addToSelected = (friend, onOff ) ->
-                $scope.selected[friend.id] = if onOff then friend else undefined
-                $scope.selectedFriends = Object.values( $scope.selected )
+                if onOff
+                        $scope.selected[friend.id] = friend
+                else
+                        delete $scope.selected[friend.id]
+                        
+                $scope.selectedCount = Object.keys($scope.selected).length
 
         $scope.inviteFriends = () ->
-                fb.invite {}, friends: $scope.selectedFriends, (response) ->
+                $scope.inviting = true
+                $scope.message = "Please wait, sending invites"
+                fb.invite {}, { friends: $scope.selected, loan: $scope.loan.id }, (response) ->
                         $scope.message = response.message
+                        $scope.message = "Invited friends."
+                        $timeout ( () -> $location.path "/" ), 2000 
         
         $scope.toggle = (friend) ->
                 friend.selected = !friend.selected
                 $scope.addToSelected( friend, friend.selected )
-
         
         ]
 
@@ -195,6 +228,8 @@
         ]
 
 @app.controller 'HelpCtrl', [ '$scope', ($scope) ->
+
+        $scope.markified = markified
 
         $scope.init = () ->
                 $scope.type = "inneed"
@@ -222,7 +257,7 @@
         $routeProvider.when('/help',
                 templateUrl: '/t/loans',
                 controller: 'HelpCtrl' )
-        $routeProvider.when('/loans',
+        $routeProvider.when('/sponsor',
                 templateUrl: '/t/loans',
                 controller: 'LoansCtrl' )
         $routeProvider.when('/donate',

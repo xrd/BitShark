@@ -5,7 +5,8 @@ Plbh::Application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/signout', to: 'sessions#destroy'
   get '/facebook/friends', to: "facebook#friends"
-
+  post '/facebook/invite', to: "facebook#invite"
+  
   get '/invite', to: 'welcome#index'
   get '/loans', to: 'welcome#index'
   get '/home', to: 'welcome#index'

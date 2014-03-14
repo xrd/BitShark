@@ -2,19 +2,32 @@
   .container-fluid
     .navbar-header
       %a.navbar-brand SharkBit
-    .navbar
-      
-      %ul.nav.navbar-nav
+    .navbar.sharkbitnav
+      .visible-xs
+        %a.dropdown-toggle Options
+        %ul.dropdown-menu
+          %li 
+            %a{ href: '/' } Home
+          %li
+            %a{ href: '/help' } Help
+          %li 
+            %a{ href: '/sponsor' } Sponsor
+          %li 
+            %a{ href: '/donate' } Donate
+          %li 
+            %a{ href: '/invite' } Invite
+
+      %ul.nav.navbar-nav.hidden-xs
+        %li 
+          %a{ href: '/' } Home
         %li
           %a{ href: '/help' } Help
         %li 
-          %a{ href: '/loans' } Loans
+          %a{ href: '/sponsor' } Sponsor
         %li 
           %a{ href: '/donate' } Donate
         %li 
           %a{ href: '/invite' } Invite
-        %li 
-          %a{ href: '/' } Home
 
         %li
           - unless @current_user

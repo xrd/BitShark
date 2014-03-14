@@ -11,11 +11,12 @@ class FacebookController < ApplicationController
   end
 
   def invite
-    # Get the list of users, invite them
-    
-    @graph.put_wall_post("!", {:name => "i love loving you",
-                           :link => "http://www.explodingdog.com/title/ilovelovingyou.html"},
-                         "tmiley")
-    
+    logger.info params.inspect
+    if false
+      @graph.put_wall_post("!", {:name => "i love loving you",
+                             :link => "http://www.explodingdog.com/title/ilovelovingyou.html"},
+                           "tmiley")
+    end
+    render json: { hi: "there" }
   end
 end
