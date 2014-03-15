@@ -4,4 +4,4 @@
     .description{ 'ng-bind-html' => 'markified( loan.description )' }
     {{ loan.progress }}% of loan pledged.
     %progressbar{ value: 'loan.progress' }
-    {{ loan.donate_button }}
+    %div{ 'ng-bind-html' => 'loan.donate_button' }
