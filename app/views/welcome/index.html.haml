@@ -4,4 +4,10 @@
 .container-fluid
   .row
     .col-sm-12
-      %div{ 'ng-view' => true }
+      - if @current_user
+        %div{ 'ng-view' => true }
+      - else
+        %h1 Shark Bit
+        %h3 Provide an alternative to predatory payday loan services.
+
+        %a{ href: '/auth/facebook' } Please login to learn more.

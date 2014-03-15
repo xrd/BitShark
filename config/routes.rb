@@ -15,6 +15,7 @@ Plbh::Application.routes.draw do
   get '/home', to: 'welcome#index'
   get '/donate', to: 'welcome#index'
   get '/help', to: 'welcome#index'
+  get '/sponsor', to: 'welcome#index'
   
   # You can have the root of your site routed with "root"
   root 'welcome#index'

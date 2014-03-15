@@ -7,17 +7,16 @@
     %label{ for: 'loaneeName' } Your first name
     %input.form-control{ type: 'text', placeholder: 'Your first name', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
 
-  %h3 Identity
+  %h3{ 'ng-show' => 'type == "sponsor"' } Thanks for offering to sponsor someone today!
+  .form-group
+    %label{ for: 'loaneeName' } Loan Recipient Name (first name only is fine)
+    %input.form-control{ type: 'text', placeholder: 'Enter the first name of the person', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
+
   .form-group
     %label{ for: 'identity' } Cell phone or email of loan recipient
     %input.form-control{ type: 'text', placeholder: 'Cell phone or email', id: 'identity', 'ng-model' => 'loan.identity' }    
     %p.help-block 
-      How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made.
-  
-  %h3{ 'ng-show' => 'type == "sponsor"' } Thanks for helping someone today!
-  .form-group
-    %label{ for: 'loaneeName' } Loan Recipient Name (first name only is fine)
-    %input.form-control{ type: 'text', placeholder: 'Enter the first name of the person', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
+      How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made.o
 
   .form-group{ 'ng-show' => 'type == "inneed"' }
     %label{ for: 'loaneeName' } Your first name
