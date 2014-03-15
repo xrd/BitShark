@@ -8,7 +8,7 @@
 
   .none{ 'ng-hide' => 'loans' } No loans available right now, try again later.
   .recipient{ 'ng-show' => 'page && loans' }
-    Choose a loan recipient: 
+    Choose a loan to sponsor: 
     %select{ 'ng-model' => 'loan', 'ng-options' => 'l.simple_description for l in loans' }
 
   .friends{ 'ng-show' => 'loan' }

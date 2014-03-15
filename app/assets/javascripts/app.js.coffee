@@ -103,6 +103,9 @@ sendLoanRequest = () ->
                         rv = text
                 rv
 
+        # $scope.feed = () ->
+        #         doFeed()
+
         $scope.sortItems = () ->
                 $scope.items.sort (a,b) ->
                         first = $scope.getNameFromFullName( a.name ).toLowerCase() || a.name

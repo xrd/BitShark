@@ -6,7 +6,7 @@
   </div>
   <div class='none' ng-hide='loans'>No loans available right now, try again later.</div>
   <div class='recipient' ng-show='page &amp;&amp; loans'>
-    Choose a loan recipient:
+    Choose a loan to sponsor:
     <select ng-model='loan' ng-options='l.simple_description for l in loans'></select>
   </div>
   <div class='friends' ng-show='loan'>

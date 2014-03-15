@@ -1,10 +1,9 @@
 class Loan < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :user
-  has_many :sponsors
   has_many :payments
 
-  LIMIT = 50
+  LIMIT = 75
   @@coinbase = Coinbase::Client.new(APP_CONFIG['coinbase']['api_key'], APP_CONFIG['coinbase']['api_secret'])
   
   def simple_description
@@ -13,13 +12,21 @@ class Loan < ActiveRecord::Base
     elipsed = sanitized.length > LIMIT ? ( sanitized[0..LIMIT] + "..." ) : sanitized
     "#{self.loanee}: #{elipsed}"
   end
-
-  def loan_code
-    "Loan#{self.id}"
-  end
   
+  def invite_on_facebook( username, email )
+    LoanMailer.invite( "#{username}@facebook.com", email, self.code )
+  end
+
+  after_validation( on: :create ) do
+    generate_secure_code()
+  end
+
+  def generate_secure_code
+    self.code = SecureRandom.hex(5)
+  end
+
   def generate_callback_url
-    "#{APP_CONFIG['root_url']}/payment/loan/#{loan_code()}"
+    "#{APP_CONFIG['root_url']}/payment/#{self.code()}"
   end
   
   def donate_button
