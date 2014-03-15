@@ -4,7 +4,8 @@
     <a class='btn btn-large btn-default active' ng-click='inviteFriends()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute</a>
     <div class='description'>Loan description: {{ loan.simple_description }}</div>
   </div>
-  <div class='recipient'>
+  <div class='none' ng-hide='loans'>No loans available right now, try again later.</div>
+  <div class='recipient' ng-show='page &amp;&amp; loans'>
     Choose a loan recipient:
     <select ng-model='loan' ng-options='l.simple_description for l in loans'></select>
   </div>

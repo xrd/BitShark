@@ -6,7 +6,8 @@
     %a.btn.btn-large.btn-default.active{ 'ng-show' => 'selectedCount', 'ng-click' => 'inviteFriends()' } Invite my {{ selectedCount }} friends to contribute
     .description Loan description: {{ loan.simple_description }}
 
-  .recipient
+  .none{ 'ng-hide' => 'loans' } No loans available right now, try again later.
+  .recipient{ 'ng-show' => 'page && loans' }
     Choose a loan recipient: 
     %select{ 'ng-model' => 'loan', 'ng-options' => 'l.simple_description for l in loans' }
 

@@ -1,4 +1,8 @@
-.donate
+.none{ 'ng-hide' => 'loans' }
+  %h2 There are no loans needed right now. 
+  Thanks for checking. Please check back later.
+
+.donate{ 'ng-show' => 'loans' }
   .loan{ 'ng-repeat' => 'loan in loans', 'ng-class' => '{ "odd" : $index%2==0, "even" : $index%2!=0 }' } 
     %h2 {{ loan.loanee }}
     .description{ 'ng-bind-html' => 'markified( loan.description )' }

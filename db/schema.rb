@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314220624) do
+ActiveRecord::Schema.define(version: 20140315062514) do
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
-    t.string   "loanee"
+    t.string   "name"
     t.string   "description"
-    t.string   "familiarity"
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "progress"
+  end
+
+  create_table "payments", force: true do |t|
+    t.integer  "loan_id"
+    t.integer  "sponsor_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sponsors", force: true do |t|

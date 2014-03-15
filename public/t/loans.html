@@ -1,25 +1,27 @@
 <div class='label' ng-show='message'>{{ message }}</div>
+Type: {{ type }}
 <div class='form' role='form'>
   <h3 ng-show='type == "inneed"'>Need a PayDay Loan?</h3>
+  <h3 ng-show='type == "sponsor"'>Thanks for offering to sponsor someone today!</h3>
   <div class='form-group' ng-show='type == "inneed"'>
     <label for='loaneeName'>Your first name</label>
     <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Your first name' type='text'>
   </div>
-  <h3 ng-show='type == "sponsor"'>Thanks for offering to sponsor someone today!</h3>
-  <div class='form-group'>
+  <div class='form-group' ng-hide='type == "inneed"'>
     <label for='loaneeName'>Loan Recipient Name (first name only is fine)</label>
     <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Enter the first name of the person' type='text'>
   </div>
   <div class='form-group'>
-    <label for='identity'>Cell phone or email of loan recipient</label>
+    <label for='identity'>Cell phone or email</label>
     <input class='form-control' id='identity' ng-model='loan.identity' placeholder='Cell phone or email' type='text'>
     <p class='help-block'>
-      How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made.o
+      <span ng-show='type == "inneed"'>We will contact you using this method when sponsors offer support</span>
+      <span ng-show='type == "sponsor"'>How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made by verifying identity.</span>
     </p>
   </div>
-  <div class='form-group' ng-show='type == "inneed"'>
-    <label for='loaneeName'>Your first name</label>
-    <input class='form-control' id='loaneeName' ng-model='loan.loanee' placeholder='Your first name' type='text'>
+  <div class='form-group' ng-show='type == "sponsor"'>
+    <label for='loaneeName'>Your name</label>
+    <input class='form-control' id='sponsorName' ng-model='loan.sponsor' placeholder='Your name' type='text'>
   </div>
   <div class='form-group'>
     <label for='loanDescription'>For purpose what will this loan be used?</label>

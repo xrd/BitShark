@@ -1,4 +1,8 @@
-<div class='donate'>
+<div class='none' ng-hide='loans'>
+  <h2>There are no loans needed right now.</h2>
+  Thanks for checking. Please check back later.
+</div>
+<div class='donate' ng-show='loans'>
   <div class='loan' ng-class='{ "odd" : $index%2==0, "even" : $index%2!=0 }' ng-repeat='loan in loans'>
     <h2>{{ loan.loanee }}</h2>
     <div class='description' ng-bind-html='markified( loan.description )'></div>

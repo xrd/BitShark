@@ -10,4 +10,6 @@
         %h1 Shark Bit
         %h3 Provide an alternative to predatory payday loan services.
 
-        %a{ href: '/auth/facebook' } Please login to learn more.
+        = render partial: 'welcome/problem'
+
+        %a.active.btn.btn-large{ href: '/auth/facebook' } Login via Facebook to get started as a donor or sponsor

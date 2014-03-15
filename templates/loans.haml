@@ -1,26 +1,30 @@
 .label{ 'ng-show' => 'message' } {{ message }}
 
+Type: {{ type }}
+
 .form{ role: 'form' }
 
   %h3{ 'ng-show' => 'type == "inneed"' } Need a PayDay Loan?
+  %h3{ 'ng-show' => 'type == "sponsor"' } Thanks for offering to sponsor someone today!
+
   .form-group{ 'ng-show' => 'type == "inneed"' }
     %label{ for: 'loaneeName' } Your first name
     %input.form-control{ type: 'text', placeholder: 'Your first name', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
 
-  %h3{ 'ng-show' => 'type == "sponsor"' } Thanks for offering to sponsor someone today!
-  .form-group
+  .form-group{ 'ng-hide' => 'type == "inneed"' }
     %label{ for: 'loaneeName' } Loan Recipient Name (first name only is fine)
     %input.form-control{ type: 'text', placeholder: 'Enter the first name of the person', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
 
   .form-group
-    %label{ for: 'identity' } Cell phone or email of loan recipient
-    %input.form-control{ type: 'text', placeholder: 'Cell phone or email', id: 'identity', 'ng-model' => 'loan.identity' }    
+    %label{ for: 'identity' } Cell phone or email
+    %input.form-control{ type: 'text', placeholder: 'Cell phone or email', id: 'identity', 'ng-model' => 'loan.identity' }
     %p.help-block 
-      How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made.o
+      %span{ 'ng-show' => 'type == "inneed"' } We will contact you using this method when sponsors offer support
+      %span{ 'ng-show' => 'type == "sponsor"' } How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made by verifying identity.
 
-  .form-group{ 'ng-show' => 'type == "inneed"' }
-    %label{ for: 'loaneeName' } Your first name
-    %input.form-control{ type: 'text', placeholder: 'Your first name', id: 'loaneeName', 'ng-model' => 'loan.loanee' }    
+  .form-group{ 'ng-show' => 'type == "sponsor"' }
+    %label{ for: 'loaneeName' } Your name
+    %input.form-control{ type: 'text', placeholder: 'Your name', id: 'sponsorName', 'ng-model' => 'loan.sponsor' }    
 
   .form-group
     %label{ for: 'loanDescription' } For purpose what will this loan be used?
