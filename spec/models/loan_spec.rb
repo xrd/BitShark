@@ -18,7 +18,7 @@ describe Loan do
   describe "#progress" do
     it "should recalculate progress when payment is made" do
       @l.payment!( 10, 1 )
-      expect( @l.progress ).to eq 90
+      expect( @l.progress ).to eq 10
     end
     
     it "should never go above 100" do

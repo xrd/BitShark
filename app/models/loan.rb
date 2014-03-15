@@ -41,14 +41,14 @@ class Loan < ActiveRecord::Base
   end
 
   # recalculate progress with payment
-  def payment!( amount, sponsor_id )
-    self.payments.create( sponsor_id: sponsor_id, amount: amount )
-    new_amount = self.amount + amount
+  def payment!( payment, sponsor_id )
+    self.payments.create( sponsor_id: sponsor_id, amount: payment )
     total = 0
     self.payments.each do |p|
       total += p.amount
     end
-    update_attribute( :progress, [ 100*(total/amount), 100 ].min )
+    count = (100*(total/self.amount)).to_i
+    update_attribute( :progress, [ count, 100 ].min )
   end
   
   def as_json( options={} )
