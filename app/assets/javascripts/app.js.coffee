@@ -7,6 +7,9 @@ markified = (txt) ->
         { donations: undefined }
         )
 
+sendLoanRequest = () ->
+
+
 @app.directive 'clearSearch', () ->
         link = (scope,element,attrs) ->
                 element.clearSearch()
@@ -29,16 +32,23 @@ markified = (txt) ->
         $scope.needed = Needed
         ]
 
-@app.controller 'DonateCtrl', [ '$scope', 'Loans', ($scope, Loans) ->
+@app.controller 'DonateCtrl', [ '$scope', 'Loans', '$sce', ($scope, Loans, $sce) ->
         $scope.markified = markified
 
         Loans.all {}, (response) ->
                 $scope.loans = response
                 for loan in $scope.loans
                         loan.progress ||= 0
+                        loan.donate_button = $sce.trustAsHtml( loan.donate_button )
         ]
 
 @app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ( $scope, Loans, $location, $timeout ) ->
+
+        $scope.sendLoanRequest = () ->
+                Loans.create( {}, { loan: $scope.loan }, ( (response) ->
+                $scope.message = "Successfully added loan"
+                $timeout ( () -> $location.path '/' ), 2000
+                ), ( (error) -> $scope.message = "Bad response" ) )
 
         $scope.init = () ->
                 $scope.type = "sponsor"
@@ -227,7 +237,7 @@ markified = (txt) ->
         $window.location.href = "/auth/facebook"
         ]
 
-@app.controller 'HelpCtrl', [ '$scope', ($scope) ->
+@app.controller 'HelpCtrl', [ '$scope', 'Loans', '$timeout', '$location', ($scope, Loans, $timeout, $location) ->
 
         $scope.markified = markified
 
@@ -235,13 +245,11 @@ markified = (txt) ->
                 $scope.type = "inneed"
                 $scope.loan = {}
 
-
-        
-        $scope.ask = () ->
+        $scope.sendLoanRequest = () ->
                 Loans.create( {}, { loan: $scope.loan }, ( (response) ->
-                        $scope.message = "Successfully added loan"
-                        $timeout ( () -> $location.path '/' ), 2000
-                        ), ( (error) -> $scope.message = "Bad response" ) )
+                $scope.message = "Successfully added loan"
+                $timeout ( () -> $location.path '/' ), 2000
+                ), ( (error) -> $scope.message = "Bad response" ) )
 
         $scope.init()
         ]

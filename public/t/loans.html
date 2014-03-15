@@ -1,5 +1,4 @@
-<div class='label' ng-show='message'>{{ message }}</div>
-Type: {{ type }}
+<div class='alert alert-info' ng-show='message'>{{ message }}</div>
 <div class='form' role='form'>
   <h3 ng-show='type == "inneed"'>Need a PayDay Loan?</h3>
   <h3 ng-show='type == "sponsor"'>Thanks for offering to sponsor someone today!</h3>
@@ -47,7 +46,8 @@ Type: {{ type }}
       <option val='limited'>I know very little about them</option>
     </select>
   </div>
-  Once you submit your sponsorship request, others inside your social circles (and those outside) will
+  Once you submit your request,
+  others inside your social circles (and those outside) will
   have an opportunity to help sponsor the loan.
-  <button class='btn btn-large' ng-click='sponsor()'>Sponsor them (and get help)</button>
+  <button class='btn btn-large' ng-click='sendLoanRequest()'>Submit loan request</button>
 </div>

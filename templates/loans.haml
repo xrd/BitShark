@@ -1,6 +1,4 @@
-.label{ 'ng-show' => 'message' } {{ message }}
-
-Type: {{ type }}
+.alert.alert-info{ 'ng-show' => 'message' } {{ message }}
 
 .form{ role: 'form' }
 
@@ -47,7 +45,8 @@ Type: {{ type }}
       %option{ val: 'some' } Some familiarity
       %option{ val: 'limited' } I know very little about them
 
-  Once you submit your sponsorship request, others inside your social circles (and those outside) will
+  Once you submit your request, 
+  others inside your social circles (and those outside) will
   have an opportunity to help sponsor the loan.
 
-  %button.btn.btn-large{ 'ng-click' => 'sponsor()' } Sponsor them (and get help)
+  %button.btn.btn-large{ 'ng-click' => 'sendLoanRequest()' } Submit loan request
