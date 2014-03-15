@@ -20,9 +20,13 @@ class Loan < ActiveRecord::Base
     elipsed = sanitized.length > LIMIT ? ( sanitized[0..LIMIT] + "..." ) : sanitized
     "#{self.loanee}: #{elipsed}"
   end
+
+  def invite_via_email( email, from, link )
+    LoanMailer.invite( email, from, link )
+  end
   
-  def invite_on_facebook( username, email )
-    LoanMailer.invite( "#{username}@facebook.com", email, received_url( self.code ) )
+  def invite_on_facebook( username, email, link )
+    LoanMailer.invite( "#{username}@facebook.com", email, link )
   end
 
   after_validation( on: :create ) do

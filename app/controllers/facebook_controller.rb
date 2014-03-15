@@ -19,7 +19,7 @@ class FacebookController < ApplicationController
     sponsors = params[:sponsors]
     loan = Loan.find( params[:loan] )
     sponsors.keys.each do |f|
-      loan.invite_on_facebook( sponsors[f][:username], @current_user.email )
+      loan.invite_on_facebook( sponsors[f][:username], @current_user.email, received_url( loan.code ) ).deliver
     end
     render json: { status: 'ok' }
   end
