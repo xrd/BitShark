@@ -4,16 +4,9 @@ describe Loan do
 
   before( :each ) do
     User.create email: Faker::Internet.email, nickname: Faker::Name.first_name, provider: "facebook", uid: (rand()*10000).to_i
-    @l = Loan.create user_id: User.first, amount: 100, name: Faker::Name.name, description: Faker::Lorem.paragraph
+    @l = Loan.create user_id: User.first, amount: 100, loanee: Faker::Name.name, description: Faker::Lorem.paragraph
   end
 
-  describe "#parse" do
-    it "should parse amounts starting with $ signs" do
-    l = Loan.create user_id: User.first, amount: "$100", name: Faker::Name.name, description: Faker::Lorem.paragraph
-      expect( l.amount ).to eq 100.0
-    end
-  end
-  
   describe "#payments" do
     it "should have payments" do
       @l.payment!( 10, 1 )

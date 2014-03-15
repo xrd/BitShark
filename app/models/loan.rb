@@ -2,6 +2,7 @@ class Loan < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :user
   has_many :payments
+  validates :amount, numericality: { greater_than: 10 }
 
   def parse_amount
     if '$' == self.amount.to_s[0]
