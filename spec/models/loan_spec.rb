@@ -7,6 +7,13 @@ describe Loan do
     @l = Loan.create user_id: User.first, amount: 100, name: Faker::Name.name, description: Faker::Lorem.paragraph
   end
 
+  describe "#parse" do
+    it "should parse amounts starting with $ signs" do
+    l = Loan.create user_id: User.first, amount: "$100", name: Faker::Name.name, description: Faker::Lorem.paragraph
+      expect( l.amount ).to eq 100.0
+    end
+  end
+  
   describe "#payments" do
     it "should have payments" do
       @l.payment!( 10, 1 )

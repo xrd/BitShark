@@ -3,6 +3,13 @@ class Loan < ActiveRecord::Base
   belongs_to :user
   has_many :payments
 
+  def parse_amount
+    if '$' == self.amount.to_s[0]
+      self.amount = self.amount.to_s[1..-1].to_f
+      puts "Amount: #{self.amount}"
+    end
+  end
+  
   LIMIT = 75
   @@coinbase = Coinbase::Client.new(APP_CONFIG['coinbase']['api_key'], APP_CONFIG['coinbase']['api_secret'])
   
@@ -14,10 +21,11 @@ class Loan < ActiveRecord::Base
   end
   
   def invite_on_facebook( username, email )
-    LoanMailer.invite( "#{username}@facebook.com", email, self.code )
+    LoanMailer.invite( "#{username}@facebook.com", email, received_url( self.code ) )
   end
 
   after_validation( on: :create ) do
+    parse_amount()
     generate_secure_code()
   end
 
