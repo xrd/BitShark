@@ -26,4 +26,3 @@
     %span.friend{ 'ng-repeat' => 'friend in page' } 
       %img.profile_picture{ "ng:src" => 'https://graph.facebook.com/{{friend.id}}/picture', 'ng-click' => 'toggle(friend)', 'ng-class' => '{ "selected" : friend.selected, "unselected" : !friend.selected }' }
     
-  
