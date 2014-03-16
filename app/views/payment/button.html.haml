@@ -1,4 +1,16 @@
-!!!
-%html
-  %body
-    = @l.button_code
+= render partial: 'welcome/navbar'
+
+.container
+  .row
+    .col-sm-12
+
+      %h4 Help out with a payday loan
+    
+      %h2= @l.loanee
+      %h4= @l.description
+      .amount== $#{@l.amount} requested
+      .progress== #{( @l.progress || 0 )}% of loan covered by donors
+      Make a $10 donation using Bitcoin
+      = raw @l.button_code
+    
+      = render partial: 'welcome/problem'
