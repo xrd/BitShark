@@ -3,7 +3,14 @@
   Thanks for checking. Please check back later.
 </div>
 <div class='donate' ng-show='loans'>
-  <div class='loan' ng-class='{ "odd" : $index%2==0, "even" : $index%2!=0 }' ng-repeat='loan in loans'>
+  <div class='search'>
+    <div class='form' role='form'>
+      <div class='form-group'>
+        <input class='form-control' id='search' ng-model='search' placeholder='Search for loans...' type='text'>
+      </div>
+    </div>
+  </div>
+  <div class='loan' ng-class='{ "odd" : $index%2==0, "even" : $index%2!=0 }' ng-repeat='loan in loans | filter:search | orderBy:"created_at":true '>
     <h2>{{ loan.loanee }}</h2>
     <div class='description' ng-bind-html='markified( loan.description )'></div>
     <div class='sponsor' ng-show='loan.sponsor'>Sponsored by {{ loan.sponsor }}</div>
@@ -11,6 +18,6 @@
     {{ loan.progress }}% of loan pledged.
     <progressbar value='loan.progress'></progressbar>
     <div ng-bind-html='loan.donate_button'></div>
-    {{ loan.code }}
+    <small>{{ loan.code }}</small>
   </div>
 </div>
