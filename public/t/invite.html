@@ -1,7 +1,7 @@
 <div class='alert alert-info' ng-show='message'>{{ message }}</div>
 <div class='toinvite' ng-hide='inviting &amp;&amp; !loading'>
   <div class='causeChosen' ng-show='loan'>
-    <a class='btn btn-large btn-default active' ng-click='inviteFriends()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute</a>
+    <a class='btn btn-large btn-default active' ng-click='open()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute</a>
     <div class='description'>Loan description: {{ loan.simple_description }}</div>
   </div>
   <div class='none' ng-hide='loans'>No loans available right now, try again later.</div>

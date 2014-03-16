@@ -3,7 +3,7 @@
 .toinvite{ 'ng-hide' => 'inviting && !loading' }
 
   .causeChosen{ 'ng-show' => 'loan' }
-    %a.btn.btn-large.btn-default.active{ 'ng-show' => 'selectedCount', 'ng-click' => 'inviteFriends()' } Invite my {{ selectedCount }} friends to contribute
+    %a.btn.btn-large.btn-default.active{ 'ng-show' => 'selectedCount', 'ng-click' => 'open()' } Invite my {{ selectedCount }} friends to contribute
     .description Loan description: {{ loan.simple_description }}
 
   .none{ 'ng-hide' => 'loans' } No loans available right now, try again later.

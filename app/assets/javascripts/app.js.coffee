@@ -73,7 +73,7 @@ sendLoanRequest = () ->
         
         ]
 
-@app.controller 'FacebookCtrl', [ '$scope', 'Facebook', '$filter', '$timeout', '$location', 'Loans', ( $scope, fb, $filter, $timeout, $location, Loans ) ->
+@app.controller 'FacebookCtrl', [ '$scope', 'Facebook', '$filter', '$timeout', '$location', 'Loans', '$modal', ( $scope, fb, $filter, $timeout, $location, Loans, $modal ) ->
                 
         $scope.alphabetPagerSize = 6
         $scope.display = {}
@@ -219,9 +219,28 @@ sendLoanRequest = () ->
                         $scope.selected[friend.id] = friend
                 else
                         delete $scope.selected[friend.id]
-                        
                 $scope.selectedCount = Object.keys($scope.selected).length
 
+        $scope.open = () ->
+
+                body = encodeURIComponent( "I am trying to eliminate payday loans.\n\nWill you join me in sponsoring a payday loan for someone in need?\n\nLearn more here: http://sharkbit.eqne.ws/payment/#{$scope.loan.code}\n\n" )
+                
+                subject = encodeURIComponent( "Help me eliminate payday loans" )
+                
+                modalInstance = $modal.open
+                        templateUrl: '/t/invite_modal',
+                        controller: 'ModalInstanceCtrl',
+                        resolve: 
+                                items: () -> $scope.selected
+                                body: () -> body
+                                subject: () -> subject
+                                
+                modalInstance.result.then () ->
+                        for item in Object.keys($scope.selected)
+                                $scope.selected[item].selected = false
+                        $scope.selected = {}
+                        $scope.selectedCount = 0
+                                                                
         $scope.inviteFriends = () ->
                 $scope.inviting = true
                 $scope.message = "Please wait, sending invites"
@@ -235,6 +254,17 @@ sendLoanRequest = () ->
                 $scope.addToSelected( friend, friend.selected )
         
         ]
+
+@app.controller 'ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', 'body', 'subject', ($scope, $modalInstance, items, body, subject ) ->
+        $scope.items = items
+        $scope.body = body
+        $scope.subject = subject
+
+        $scope.ok =  () ->
+                $modalInstance.close()
+
+        ]
+
 
 @app.controller 'LoginCtrl', [ '$scope', '$window', ($scope, $window) ->
         $window.location.href = "/auth/facebook"

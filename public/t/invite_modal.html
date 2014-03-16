@@ -1,0 +1,16 @@
+        <div class="modal-header">
+            <h3>Invite friends</h3>
+        </div>
+        <div class="modal-body">
+            Click each link to send an invitation. You may customize the message before sending or just send it
+            as-is.
+            <ul>
+                <li ng-repeat="item in items" ng-hide="item.hidden">
+                    <a target="_new" ng-click="item.hidden = true" ng-href="mailto:{{item.username}}@facebook.com?subject={{subject}}&body={{body}}">Invite {{item.name}} </a>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary"
+            ng-click="ok()">OK</button>
+        </div>

@@ -20,10 +20,6 @@
       %span{ 'ng-show' => 'type == "inneed"' } We will contact you using this method when sponsors offer support
       %span{ 'ng-show' => 'type == "sponsor"' } How can we contact the loan recipient? This makes it easy to make successive loans once repayment has been made by verifying identity.
 
-  .form-group{ 'ng-show' => 'type == "sponsor"' }
-    %label{ for: 'loaneeName' } Your name
-    %input.form-control{ type: 'text', placeholder: 'Your name', id: 'sponsorName', 'ng-model' => 'loan.sponsor' }    
-
   .form-group
     %label{ for: 'loanDescription' } For purpose what will this loan be used?
     %p.help-block 
