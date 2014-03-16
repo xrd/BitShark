@@ -68,6 +68,7 @@ class Loan < ActiveRecord::Base
     end
     count = (100*(total/self.amount)).to_i
     update_attribute( :progress, [ count, 100 ].min )
+    LoanMailer.notify( self.user.email, payment, self.progress )
   end
   
   def as_json( options={} )
