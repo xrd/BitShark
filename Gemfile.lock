@@ -50,6 +50,7 @@ GEM
       httparty (>= 0.8.3)
       money (= 5.1.1)
       multi_json (>= 1.3.4)
+    curb (0.8.5)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -230,6 +231,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
   coinbase
+  curb
   faker
   guard-haml
   haml-rails
