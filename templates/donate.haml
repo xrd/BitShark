@@ -8,7 +8,7 @@
   .search
     .form{ role: 'form' }
       .form-group
-        %input.form-control{ type: 'text', placeholder: 'Search for loans...', id: 'search', 'ng-model' => 'search' }    
+        %input.form-control{ type: 'text', placeholder: 'Search for loans...', id: 'search', 'ng-model' => 'search', 'clear-search' => true }    
 
   .loan{ 'ng-repeat' => 'loan in loans | filter:search | orderBy:"created_at":true ', 'ng-class' => '{ "odd" : $index%2==0, "even" : $index%2!=0 }' } 
     %h2 {{ loan.loanee }}
