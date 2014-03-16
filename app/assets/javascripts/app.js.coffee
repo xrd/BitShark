@@ -39,7 +39,7 @@ sendLoanRequest = () ->
                 $scope.loans = response
                 for loan in $scope.loans
                         loan.progress ||= 0
-                        loan.donate_button = $sce.trustAsHtml( loan.donate_button )
+                        loan.button_code = $sce.trustAsHtml( loan.button_code )
         ]
 
 @app.controller 'LoansCtrl', [ '$scope', 'Loans', '$location', '$timeout', ( $scope, Loans, $location, $timeout ) ->

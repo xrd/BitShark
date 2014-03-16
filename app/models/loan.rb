@@ -32,10 +32,15 @@ class Loan < ActiveRecord::Base
   after_validation( on: :create ) do
     parse_amount()
     generate_secure_code()
+    generate_button_code()
   end
 
   def generate_secure_code
     self.code = SecureRandom.hex(5)
+  end
+
+  def generate_button_code
+    self.button_code = donate_button()
   end
 
   def generate_callback_url
@@ -72,7 +77,7 @@ class Loan < ActiveRecord::Base
   end
   
   def as_json( options={} )
-    super( options.merge( methods: [ :simple_description, :donate_button ] ) )
+    super( options.merge( methods: [ :simple_description ] ) )
   end
   
 end
