@@ -44,7 +44,7 @@ describe PaymentController do
   end
   
   it "should retrieve the correct loan" do
-    post "payment_received", @l.code, JSON.parse( json ) #, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    post "/payment/#{@l.code}", JSON.parse( json ) #, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
     expect( @l.reload.progress ).to ne 0
   end
 end
