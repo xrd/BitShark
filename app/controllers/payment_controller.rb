@@ -5,7 +5,8 @@ class PaymentController < ApplicationController
   def payment_received
     loan = Loan.find_by_code params[:code]
     if loan
-      loan.payment!( params['order']['total_native']['cents']/100, params["order"]["transaction"]["id"] )
+      cents = params['order']['total_native']['cents'].to_i
+      loan.payment!( cents/100, params["order"]["transaction"]["id"] )
     end
     render json: loan
   end
