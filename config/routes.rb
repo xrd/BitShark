@@ -7,7 +7,7 @@ Plbh::Application.routes.draw do
   get '/auth/signout', to: 'sessions#destroy'
   get '/facebook/friends', to: "facebook#friends"
   post '/facebook/invite', to: "facebook#invite"
-  get '/payment/:code', to: "payment#payment_received", as: 'received'
+  post '/payment/:code', to: "payment#payment_received", as: 'received'
   
   get '/invite', to: 'welcome#index'
   get '/loans', to: 'welcome#index'
