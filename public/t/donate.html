@@ -17,7 +17,8 @@
     ${{ loan.amount }} requested.
     {{ loan.progress }}% of loan pledged.
     <progressbar value='loan.progress'></progressbar>
-    <div ng-bind-html='loan.donate_button'></div>
+    <div ng-bind-html='loan.button_code'></div>
     <small>{{ loan.code }}</small>
+    {{ loan | json }}
   </div>
 </div>

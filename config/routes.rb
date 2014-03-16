@@ -8,6 +8,7 @@ Plbh::Application.routes.draw do
   get '/facebook/friends', to: "facebook#friends"
   post '/facebook/invite', to: "facebook#invite"
   post '/payment/:code', to: "payment#payment_received", as: 'received'
+  get '/payment/:code', to: "payment#button", as: 'button'
   
   get '/invite', to: 'welcome#index'
   get '/loans', to: 'welcome#index'

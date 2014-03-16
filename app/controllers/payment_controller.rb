@@ -12,6 +12,6 @@ class PaymentController < ApplicationController
   end
   
   def button
-    @s = Sponsor.find_by_code( params[:code] )
+    @l = Loan.find_by_code( params[:code] )
   end
 end

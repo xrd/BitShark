@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316073541) do
+ActiveRecord::Schema.define(version: 20140316084356) do
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140316073541) do
     t.datetime "updated_at"
     t.integer  "progress"
     t.string   "code"
+    t.text     "button_code"
   end
 
   create_table "payments", force: true do |t|
