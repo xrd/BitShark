@@ -4,16 +4,19 @@
 
   .causeChosen{ 'ng-show' => 'loan' }
     %a.btn.btn-large.btn-default.active{ 'ng-show' => 'selectedCount', 'ng-click' => 'open()' } Invite my {{ selectedCount }} friends to contribute
-    .description Loan description: {{ loan.simple_description }}
 
   .none{ 'ng-hide' => 'loans' } No loans available right now, try again later.
   .recipient{ 'ng-show' => 'page && loans' }
-    Choose a loan to sponsor: 
-    %select{ 'ng-model' => 'loan', 'ng-options' => 'l.simple_description for l in loans' }
+    .form{ role: 'form' }
+      .form-group
+        %label{ for: 'loan' } Choose a loan to sponsor: 
+        %select{ 'ng-model' => 'loan', 'ng-options' => 'l.simple_description for l in loans', id: 'loan' }
 
   .friends{ 'ng-show' => 'loan' }
-  
-    %input{ 'ng-model' => 'search', placeholder: 'Search by name...', 'ng-change' => 'searchByName()', 'clear-search' => true }
+    .form{ role: 'form' }
+      .form-group
+        %input.form-control{ 'ng-model' => 'search', placeholder: 'Search by name...', 'ng-change' => 'searchByName()', 'clear-search' => true }
+
     %span.alphabet_pager                                                                                                
       %span{ 'ng-repeat' => 'item in alphabetPagerChunks' }                                                        
         %span{ 'ng-hide' => '0 == $index' } |

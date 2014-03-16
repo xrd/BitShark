@@ -2,15 +2,22 @@
 <div class='toinvite' ng-hide='inviting &amp;&amp; !loading'>
   <div class='causeChosen' ng-show='loan'>
     <a class='btn btn-large btn-default active' ng-click='open()' ng-show='selectedCount'>Invite my {{ selectedCount }} friends to contribute</a>
-    <div class='description'>Loan description: {{ loan.simple_description }}</div>
   </div>
   <div class='none' ng-hide='loans'>No loans available right now, try again later.</div>
   <div class='recipient' ng-show='page &amp;&amp; loans'>
-    Choose a loan to sponsor:
-    <select ng-model='loan' ng-options='l.simple_description for l in loans'></select>
+    <div class='form' role='form'>
+      <div class='form-group'>
+        <label for='loan'>Choose a loan to sponsor:</label>
+        <select id='loan' ng-model='loan' ng-options='l.simple_description for l in loans'></select>
+      </div>
+    </div>
   </div>
   <div class='friends' ng-show='loan'>
-    <input clear-search ng-change='searchByName()' ng-model='search' placeholder='Search by name...'>
+    <div class='form' role='form'>
+      <div class='form-group'>
+        <input class='form-control' clear-search ng-change='searchByName()' ng-model='search' placeholder='Search by name...'>
+      </div>
+    </div>
     <span class='alphabet_pager'>
       <span ng-repeat='item in alphabetPagerChunks'>
         <span ng-hide='0 == $index'></span>
