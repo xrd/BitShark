@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316084356) do
+ActiveRecord::Schema.define(version: 20140316085925) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
@@ -41,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140316084356) do
     t.string   "name"
     t.string   "nickname"
     t.string   "email"
-    t.string   "full"
+    t.text     "full"
     t.string   "auth_token"
     t.datetime "created_at"
     t.datetime "updated_at"
