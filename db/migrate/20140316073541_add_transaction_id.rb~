@@ -1,0 +1,4 @@
+class AddTransactionId < ActiveRecord::Migration
+  def change
+  end
+end

@@ -60,8 +60,8 @@ class Loan < ActiveRecord::Base
   end
 
   # recalculate progress with payment
-  def payment!( payment, sponsor_id )
-    self.payments.create( sponsor_id: sponsor_id, amount: payment )
+  def payment!( payment, id )
+    self.payments.create( amount: payment, transaction_id: id )
     total = 0
     self.payments.each do |p|
       total += p.amount
