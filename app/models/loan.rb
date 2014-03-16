@@ -49,13 +49,12 @@ class Loan < ActiveRecord::Base
         name = "Loan Sponsorship for Loan: #{self.id}"
         price =  10.00.to_money('USD')
         description = "Loan Sponsorship @ $10"
-        custom_code = loan_code()
         cb_url = generate_callback_url()
-        r = @@coinbase.create_button name, price, description, custom_code, { callback_url: cb_url }
+        r = @@coinbase.create_button name, price, description, self.code, { callback_url: cb_url }
         html = r.embed_html
       end
     rescue Exception => e
-      html = "<button>Pay using bitcoin</button>"
+      html = e.to_s
     end
     html
   end
